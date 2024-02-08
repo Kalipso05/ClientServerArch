@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            line-height: 1.5;
+        }
+        .endpoint{
+            margin-bottom: 10px;
+        }
+        .endpoint pre{
+            background-color: rgb(149, 151, 151);
+            padding: 10px;
+            margin-top: 5px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Documentation Server</h1>
+    <p>Эта документация</p>
+
+    <div class="endpoint">
+        <h2>GET /api</h2>
+        <h3>Response html documentation</h3>
+        <pre>HTTP/1.1 200 OK
+Content-Type: text/html       
+[HTML Content of API Documentation]</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /api/MedicalCards</h2>
+        <p>Response medical card</p>
+        <h3>Response</h3>
+        <pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+    {
+        "Id": 1,
+        "Code": "124565"
+        "PathQRCode": "path/qr/123456.png"
+    },
+    {
+        "Id": 2,
+        "Code": "341565"
+        "PathQRCode": "path/qr/341565.png"
+    }
+]
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>POST /api/MedicalCards</h2>
+        <p>Add new Medical Card</p>
+        <h3>Request:</h3>
+        <pre>
+{
+    "Code": "unique_code",
+    PathQRCode: "path/qr/unique_code.png"
+}
+        </pre>
+        <h3>Response</h3>
+        <pre>
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+    "Message": "New Medical Card add"
+}
+        </pre>
+        <pre>
+HTTP/1.1 409 Conflict
+Content-Type: application/json
+            
+{
+    "Message": "This code already exists"
+}
+                    </pre>
+    </div>
+</body>
+</html>

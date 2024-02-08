@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .endpoint {
+            margin-bottom: 20px;
+        }
+        .endpoint h2, .endpoint h3 {
+            margin-bottom: 10px;
+        }
+        .endpoint pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-top: 5px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Server </h1>
+    <p>This document describes the endpoints available in our API server and how to interact with them.</p>
+
+    <div class="endpoint">
+        <h2>GET /api</h2>
+        <p>Returns API documentation.</p>
+        <h3>Response:</h3>
+        <pre>HTTP/1.1 200 OK
+Content-Type: text/html
+
+[HTML Content of API Documentation]</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /api/MedicalCards</h2>
+        <p>Returns a list of all medical cards.</p>
+        <h3>Response:</h3>
+        <pre>HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+    {
+        "Id": 1,
+        "Code": "123456",
+        "PathQRCode": "path/to/qr/code1.png"
+    },
+    {
+        "Id": 2,
+        "Code": "654321",
+        "PathQRCode": "path/to/qr/code2.png"
+    }
+]</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>POST /api/MedicalCards</h2>
+        <p>Adds a new medical card. Requires a unique code and the path to its QR code.</p>
+        <h3>Request:</h3>
+        <pre>{
+    "Code": "unique_code",
+    "PathQRCode": "path/to/qr/code.png"
+}</pre>
+        <h3>Response:</h3>
+        <pre>HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+    "Message": "New medical card added successfully."
+}</pre>
+        <pre>HTTP/1.1 409 Conflict
+Content-Type: application/json
+
+{
+    "Message": "The code already exists."
+}</pre>
+    </div>
+</body>
+</html>

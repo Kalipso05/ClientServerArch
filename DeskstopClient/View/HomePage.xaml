@@ -1,0 +1,245 @@
+﻿<Page x:Class="DeskstopClient.View.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DeskstopClient.View"
+      mc:Ignorable="d" 
+      Loaded="Page_Loaded"
+      FontFamily="Cascadia Code"
+      FontSize="13"
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="HomePage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="650"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" x:Name="gridPatient" Visibility="Visible"> <!--Регистрация пациента-->
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="300"
+                        Height="400">
+                <Label Content="Регистрация пациента" HorizontalAlignment="Center"/>
+                <Label Content="Имя"/>
+                <TextBox x:Name="txbFirstName"/>
+                <Label Content="Фамилия"/>
+                <TextBox x:Name="txbLastName"/>
+                <Label Content="Отчество"/>
+                <TextBox x:Name="txbPatronymic"/>
+                <Label Content="Номер"/>
+                <TextBox x:Name="txbPhone"/>
+                <Label Content="Почта"/>
+                <TextBox x:Name="txbEmail"/>
+                <Label Content="Дата рождения"/>
+                <DatePicker x:Name="dpDateOfBirth"/>
+                <Button Content="Сохранить" Background="DarkOrange" Foreground="White" Margin="0, 15" Height="25" Width="200" Click="btnAddpatient_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="0" x:Name="gridDiseaseHistory" Visibility="Collapsed"> <!--Добавление истории болезни-->
+            <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="300"
+                Height="400">
+                <Label Content="История болезни" HorizontalAlignment="Center"/>
+                <Label Content="Выберите пациента"/>
+                <ComboBox x:Name="cmbSelectPatientForDiseaseHistory" DisplayMemberPath="LastName"/>
+                <Label Content="Название болезни"/>
+                <TextBox x:Name="txbNameDisease"/>
+                <Label Content="Описание болезни"/>
+                <TextBox x:Name="txbDescriptionDisease" Height="50"/>
+                <Label Content="Дата заболевания"/>
+                <DatePicker Name="dpDateOfDisease"/>
+                <Button Content="Сохранить" Background="DarkOrange" Foreground="White" Margin="0, 15" Height="25" Width="200" Click="btnAddDiseaseHistory_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="0" x:Name="gridMedicalCard" Visibility="Collapsed"> <!--Добавление медицинской карты-->
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="300"
+                        Height="400">   
+                <Label Content="Медицинская карта" HorizontalAlignment="Center"/>
+                <Label Content="Выберите пациента"/>
+                <ComboBox x:Name="cmbSelectPatientForMedicalCard" DisplayMemberPath="LastName"/>
+                <Button Content="Сгенерировать" Background="DarkOrange" Foreground="White" Margin="0, 15" Height="25" Width="200" Click="btnAddMedicalCard_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1"> <!--ListView-->
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="380"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"> <!--История болезни и мед.карты-->
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Button x:Name="btnDiseaseHistory" Content="История болезни" Margin="0, 0, 10, 0" Background="DarkOrange" Foreground="White" Click="btnDiseaseHistory_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="7"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="btnMedicalcard" Content="Медицинская карта" Background="DarkOrange" Foreground="White" Click="btnMedicalCard_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="7"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1"> 
+                <ListView x:Name="listViewPatient" Visibility="Visible" SelectionChanged="listViewPatient_SelectionChanged"> <!--ListView пациентов-->
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Имя" Width="70" DisplayMemberBinding="{Binding FirstName}"/>
+                            <GridViewColumn Header="Фамилия" Width="70" DisplayMemberBinding="{Binding LastName}"/>
+                            <GridViewColumn Header="Отчество" Width="70" DisplayMemberBinding="{Binding Patronymic}"/>
+                            <GridViewColumn Header="Номер" Width="80" DisplayMemberBinding="{Binding Phone}"/>
+                            <GridViewColumn Header="Почта" Width="80" DisplayMemberBinding="{Binding Email}"/>
+                            <GridViewColumn Header="Дата рождения" Width="110" DisplayMemberBinding="{Binding DateOfBirth}"/>
+                            <GridViewColumn Header="Действие" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Button Content="Edit" Width="150" Click="btnEditPatientButton_Click">
+                                                <Button.Style>
+                                                    <Style TargetType="Button">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Setter Property="Background" Value="#434B4D"/>
+                                                        <Setter Property="Foreground" Value="White"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                            <Button Content="Delete" Width="150" Click="btnDeletePatientButton_Click">
+                                                <Button.Style>
+                                                    <Style TargetType="Button">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Setter Property="Background" Value="#434B4D"/>
+                                                        <Setter Property="Foreground" Value="White"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView x:Name="listViewDesiaseHistory" Visibility="Collapsed" SelectionChanged="listViewDesiaseHistory_SelectionChanged"> <!--ListView истории болезней-->
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Имя" Width="70" DisplayMemberBinding="{Binding Patient.FirstName}"/>
+                            <GridViewColumn Header="Фамилия" Width="70" DisplayMemberBinding="{Binding Patient.LastName}"/>
+                            <GridViewColumn Header="Отчество" Width="70" DisplayMemberBinding="{Binding Patient.Patronymic}"/>
+                            <GridViewColumn Header="Название болезни" Width="70" DisplayMemberBinding="{Binding NameDisease}"/>
+                            <GridViewColumn Header="Описание" Width="90" DisplayMemberBinding="{Binding Description}"/>
+                            <GridViewColumn Header="Дата заболевания" Width="150" DisplayMemberBinding="{Binding DateOfDisease}"/>
+                            <GridViewColumn Header="Действие" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Button Content="Edit" Width="150" Click="btnEditDiseaseButton_Click">
+                                                <Button.Style>
+                                                    <Style TargetType="Button">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Setter Property="Background" Value="#434B4D"/>
+                                                        <Setter Property="Foreground" Value="White"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                            <Button Content="Delete" Width="150" Click="btnDeleteDiseaseButton_Click">
+                                                <Button.Style>
+                                                    <Style TargetType="Button">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Setter Property="Background" Value="#434B4D"/>
+                                                        <Setter Property="Foreground" Value="White"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView x:Name="listViewMedicalCard" Visibility="Collapsed" SelectionChanged="listViewMedicalCard_SelectionChanged">  <!--ListView медицинской карты-->
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Имя" Width="100" DisplayMemberBinding="{Binding Patient.FirstName}"/>
+                            <GridViewColumn Header="Фамилия" Width="100" DisplayMemberBinding="{Binding Patient.LastName}"/>
+                            <GridViewColumn Header="Отчество" Width="100" DisplayMemberBinding="{Binding Patient.Patronymic}"/>
+                            <GridViewColumn Header="Уникальный код" Width="120" DisplayMemberBinding="{Binding Code}"/>
+                            <GridViewColumn Header="Путь до QRCod'а" Width="200" DisplayMemberBinding="{Binding PathQRCode}"/>
+                            <GridViewColumn Header="Действие" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Button Content="Delete" Width="150" Click="btnDeleteMedicalButton_Click">
+                                                <Button.Style>
+                                                    <Style TargetType="Button">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Setter Property="Background" Value="#434B4D"/>
+                                                        <Setter Property="Foreground" Value="White"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

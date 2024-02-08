@@ -1,0 +1,14 @@
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\bin\Debug\ModelDataBase.exe.config
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\bin\Debug\ModelDataBase.exe
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\bin\Debug\ModelDataBase.pdb
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\bin\Debug\EntityFramework.dll
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\bin\Debug\EntityFramework.xml
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\obj\Debug\ModelDataBase.csproj.AssemblyReference.cache
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\obj\Debug\ModelDataBase.csproj.CoreCompileInputs.cache
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\obj\Debug\ModelDataBase.csproj.CopyComplete
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\obj\Debug\ModelDataBase.exe
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\obj\Debug\ModelDataBase.pdb
+C:\Users\ServerPC\source\repos\Project\ModelDataBase\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
